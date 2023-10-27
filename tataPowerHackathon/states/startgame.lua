@@ -2,9 +2,8 @@
 local love = require("love")
 local settingsModal = require("states.settingsModal") -- Add this line
 local instructionsModal = require("states.instructionsModal") -- Add this line
-
+local level1 = require("levels.level1")
 local startgame = {}
-
 -- Load the background image
 local background = love.graphics.newImage("assets/images/bg.jpg")
 
@@ -15,8 +14,8 @@ local buttonFont = love.graphics.newFont("assets/fonts/EncodeSansSemiCondensed-B
 local buttonWidth = 200
 local buttonHeight = 60
 local buttonSpacing = 20
-local buttonX = (love.graphics.getWidth() - buttonWidth) / 2
-local startY = (love.graphics.getHeight() - (3 * buttonHeight + 2 * buttonSpacing)) / 2
+local buttonX = 850
+local startY = 400
 
 local buttons = {
     { text = "Start Game", action = "start" },
@@ -90,7 +89,7 @@ end
 
 function handleButtonClick(action)
     if action == "start" then
-        -- Navigate to the level1 screen (implement this part in your game)
+        switchScreen("level1") -- Switch to the "level1" screen
     elseif action == "exit" then
         love.event.quit() -- Close the game
     elseif action == "instructions" then
