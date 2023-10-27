@@ -1,6 +1,7 @@
 -- Import required modules
 local love = require("love")
-local level1 = require("levels.level1") -- Import the Level 1 module
+local level1 = require("levels.level1")
+local startgame = require("states.startgame")
 
 -- Initialize the game
 function love.load()
@@ -13,13 +14,11 @@ function love.load()
     
     -- level1.load() -- Load Level 1
 end
-
 -- Update game logic
 function love.update(dt)
     -- level1.update(dt) -- Update Level 1 logic
 end
-
 -- Render the game
 function love.draw()
-    level1.draw() -- Draw Level 1
+    startgame.draw()
 end
