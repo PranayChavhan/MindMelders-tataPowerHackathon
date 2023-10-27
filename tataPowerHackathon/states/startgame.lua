@@ -1,17 +1,10 @@
--- Import required modules
 local love = require("love")
 local settingsModal = require("states.settingsModal")
 local instructionsModal = require("states.instructionsModal")
 local level1 = require("levels.level1")
 local startgame = {}
-
--- Load the background image
 local background = love.graphics.newImage("assets/images/bg.jpg")
-
--- Load the bold font
 local buttonFont = love.graphics.newFont("assets/fonts/EncodeSansSemiCondensed-Black.ttf", 24)
-
--- Button properties
 local buttonWidth = 200
 local buttonHeight = 60
 local buttonSpacing = 20
@@ -24,27 +17,21 @@ local buttons = {
     { text = "Instructions", action = "instructions" },
     { text = "Settings", action = "settings" }
 }
-
 local cornerRadius = 10
 local cursorChanged = false
 local scaleFactor = 1.05
 local scaleButton = nil
-
--- Modals
 local showModal = false
 local modalText = ""
 
 function startgame.draw()
-    -- Draw the darkened background image
     love.graphics.setColor(100, 100, 100)
     love.graphics.draw(background, 0, 0, 0, love.graphics.getWidth() / background:getWidth(), love.graphics.getHeight() / background:getHeight())
 
-    cursorChanged = false -- Reset cursor change
+    cursorChanged = false
 
     for i, button in ipairs(buttons) do
         local buttonY = startY + (i - 1) * (buttonHeight + buttonSpacing)
-
-        -- Check if the mouse is over the button
         local mouseX, mouseY = love.mouse.getPosition()
         local isOverButton = mouseX >= buttonX and mouseX <= buttonX + buttonWidth and
             mouseY >= buttonY and mouseY <= buttonY + buttonHeight
@@ -54,10 +41,7 @@ function startgame.draw()
                 scaleButton = button
             end
 
-            -- Set cursor pointer
             love.mouse.setCursor(love.mouse.getSystemCursor("hand"))
-
-            -- Scale the button
             love.graphics.setColor(255, 255, 255)
             love.graphics.rectangle("fill", buttonX - buttonWidth * (scaleFactor - 1) / 2, buttonY - buttonHeight * (scaleFactor - 1) / 2, buttonWidth * scaleFactor, buttonHeight * scaleFactor, cornerRadius, cornerRadius)
             love.graphics.setColor(0, 255, 0)
@@ -67,12 +51,10 @@ function startgame.draw()
                 scaleButton = nil
             end
 
-            -- Set the original button color
             love.graphics.setColor(0, 255, 0)
             love.graphics.rectangle("fill", buttonX, buttonY, buttonWidth, buttonHeight, cornerRadius, cornerRadius)
         end
 
-        -- Draw the button text in the center
         local textWidth = buttonFont:getWidth(button.text)
         local textX = buttonX + (buttonWidth - textWidth) / 2
         local textY = buttonY + (buttonHeight - buttonFont:getHeight()) / 2
@@ -80,24 +62,21 @@ function startgame.draw()
         love.graphics.setFont(buttonFont)
         love.graphics.print(button.text, textX, textY)
 
-        -- Check for button clicks
-        if love.mouse.isDown(1) then -- 1 represents the left mouse button
+        if love.mouse.isDown(1) then
             if isOverButton then
                 handleButtonClick(button.action)
             end
         end
     end
 
-    -- Show modal if needed
     if showModal then
-        love.graphics.setColor(0, 0, 0, 200) -- Semi-transparent background
+        love.graphics.setColor(0, 0, 0, 200)
         love.graphics.rectangle("fill", 100, 100, love.graphics.getWidth() - 200, love.graphics.getHeight() - 200)
         love.graphics.setColor(255, 255, 255)
         love.graphics.setFont(buttonFont)
         love.graphics.printf(modalText, 120, 120, love.graphics.getWidth() - 240, "center")
     end
 
-    -- Reset the cursor if it was not changed
     if not cursorChanged then
         love.mouse.setCursor()
     end
@@ -105,13 +84,13 @@ end
 
 function handleButtonClick(action)
     if action == "start" then
-        switchScreen("level1") -- Switch to the "level1" screen
+        switchScreen("level1")
     elseif action == "exit" then
-        love.event.quit() -- Close the game
+        love.event.quit()
     elseif action == "instructions" then
-        instructionsModal.showInstructions() -- Show instructions modal
+        instructionsModal.showInstructions()
     elseif action == "settings" then
-        settingsModal.showSettings() -- Show settings modal
+        settingsModal.showSettings()
     end
 end
 
