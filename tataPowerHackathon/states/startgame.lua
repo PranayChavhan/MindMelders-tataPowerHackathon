@@ -24,15 +24,27 @@ local buttons = {
 }
 
 local cornerRadius = 10
+local cursorChanged = false
 
 function startgame.draw()
     -- Draw the darkened background image
     love.graphics.setColor(100, 100, 100)
     love.graphics.draw(background, 0, 0, 0, love.graphics.getWidth() / background:getWidth(), love.graphics.getHeight() / background:getHeight())
 
+    cursorChanged = false -- Reset cursor change
+
     for i, button in ipairs(buttons) do
         local buttonY = startY + (i - 1) * (buttonHeight + buttonSpacing)
         
+        -- Check if the mouse is over the button
+        local mouseX, mouseY = love.mouse.getPosition()
+        if mouseX >= buttonX and mouseX <= buttonX + buttonWidth and
+           mouseY >= buttonY and mouseY <= buttonY + buttonHeight then
+            -- Set cursor pointer
+            love.mouse.setCursor(love.mouse.getSystemCursor("hand"))
+            cursorChanged = true
+        end
+
         -- Set the green background color for each button
         local buttonColor = {0, 255, 0}
         love.graphics.setColor(buttonColor)
@@ -45,6 +57,11 @@ function startgame.draw()
         love.graphics.setColor(255, 255, 255)
         love.graphics.setFont(buttonFont)
         love.graphics.print(button.text, textX, textY)
+    end
+
+    -- Reset the cursor if it was not changed
+    if not cursorChanged then
+        love.mouse.setCursor()
     end
 end
 
