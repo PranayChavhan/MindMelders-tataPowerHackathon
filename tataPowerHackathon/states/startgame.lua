@@ -1,9 +1,10 @@
 -- Import required modules
 local love = require("love")
-local settingsModal = require("states.settingsModal") -- Add this line
-local instructionsModal = require("states.instructionsModal") -- Add this line
+local settingsModal = require("states.settingsModal")
+local instructionsModal = require("states.instructionsModal")
 local level1 = require("levels.level1")
 local startgame = {}
+
 -- Load the background image
 local background = love.graphics.newImage("assets/images/bg.jpg")
 
@@ -26,6 +27,8 @@ local buttons = {
 
 local cornerRadius = 10
 local cursorChanged = false
+local scaleFactor = 1.05
+local scaleButton = nil
 
 -- Modals
 local showModal = false
@@ -40,20 +43,34 @@ function startgame.draw()
 
     for i, button in ipairs(buttons) do
         local buttonY = startY + (i - 1) * (buttonHeight + buttonSpacing)
-        
+
         -- Check if the mouse is over the button
         local mouseX, mouseY = love.mouse.getPosition()
-        if mouseX >= buttonX and mouseX <= buttonX + buttonWidth and
-           mouseY >= buttonY and mouseY <= buttonY + buttonHeight then
+        local isOverButton = mouseX >= buttonX and mouseX <= buttonX + buttonWidth and
+            mouseY >= buttonY and mouseY <= buttonY + buttonHeight
+
+        if isOverButton then
+            if not scaleButton then
+                scaleButton = button
+            end
+
             -- Set cursor pointer
             love.mouse.setCursor(love.mouse.getSystemCursor("hand"))
-            cursorChanged = true
-        end
 
-        -- Set the green background color for each button
-        local buttonColor = {0, 255, 0}
-        love.graphics.setColor(buttonColor)
-        love.graphics.rectangle("fill", buttonX, buttonY, buttonWidth, buttonHeight, cornerRadius, cornerRadius)
+            -- Scale the button
+            love.graphics.setColor(255, 255, 255)
+            love.graphics.rectangle("fill", buttonX - buttonWidth * (scaleFactor - 1) / 2, buttonY - buttonHeight * (scaleFactor - 1) / 2, buttonWidth * scaleFactor, buttonHeight * scaleFactor, cornerRadius, cornerRadius)
+            love.graphics.setColor(0, 255, 0)
+            love.graphics.rectangle("fill", buttonX, buttonY, buttonWidth, buttonHeight, cornerRadius, cornerRadius)
+        else
+            if scaleButton == button then
+                scaleButton = nil
+            end
+
+            -- Set the original button color
+            love.graphics.setColor(0, 255, 0)
+            love.graphics.rectangle("fill", buttonX, buttonY, buttonWidth, buttonHeight, cornerRadius, cornerRadius)
+        end
 
         -- Draw the button text in the center
         local textWidth = buttonFont:getWidth(button.text)
@@ -65,8 +82,7 @@ function startgame.draw()
 
         -- Check for button clicks
         if love.mouse.isDown(1) then -- 1 represents the left mouse button
-            if mouseX >= buttonX and mouseX <= buttonX + buttonWidth and
-               mouseY >= buttonY and mouseY <= buttonY + buttonHeight then
+            if isOverButton then
                 handleButtonClick(button.action)
             end
         end
@@ -98,6 +114,5 @@ function handleButtonClick(action)
         settingsModal.showSettings() -- Show settings modal
     end
 end
-
 
 return startgame
