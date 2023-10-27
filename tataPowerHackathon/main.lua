@@ -1,27 +1,60 @@
--- Import required modules
-local love = require("love")
-local level1 = require("levels.level1")
-local startgame = require("states.startgame")
-local settingsModal = require("states.settingsModal")
-local instructionsModal = require("states.instructionsModal")
 
--- Initialize the game
+require 'src/Dependencies'
+
+
 function love.load()
-    -- Set up the game window
-    love.window.setTitle("EcoCraft Challenge")
+    -- init -> screen generation--
+    -- push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
+    --     fullscreen = false,
+    --     vsync = true,
+    --     resizable = true,
+    -- })
 
-    -- Set full screen mode with the appropriate display width and height
-    local displayWidth, displayHeight = love.window.getDesktopDimensions()
-    love.window.setMode(displayWidth, displayHeight, {fullscreen = false})
+    love.window.setMode(VIRTUAL_WIDTH,VIRTUAL_HEIGHT)
+
+    math.randomseed(os.time())
+    print(os.time())
+
+      -- keep track of keypressed
+    
+    love.keyboard.keysPressed={}
+
+    gStateStack = StateStack()
+    gStateStack:push(MainMenu())
+
+   
 end
 
--- Update game logic
 function love.update(dt)
+    gStateStack:update(dt)
+    love.keyboard.keysPressed={}
 end
 
--- Render the game
-function love.draw()
-    startgame.draw()
-    settingsModal.draw() 
-    instructionsModal.draw() 
+-- function love.resize(w, h)
+--     push:resize(w, h)
+-- end
+
+function love.keypressed(key)
+    if key == 'escape' then
+        love.event.quit()
+    end
+    love.keyboard.keysPressed[key] = true
 end
+
+function love.keyboard.wasPressed(key)
+    return love.keyboard.keysPressed[key]
+end
+
+function love.draw()
+
+    --push:start()
+
+    --love.graphics.setColor(0.1,0.1,0.1)
+    --love.graphics.rectangle("fill",0,0,VIRTUAL_WIDTH,VIRTUAL_HEIGHT)  
+    gStateStack:render()
+    --push:finish()
+
+end 
+
+
+
