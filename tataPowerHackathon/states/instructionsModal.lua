@@ -20,8 +20,17 @@ local closeButtonY = modalY + 10
 local closeButtonWidth = 30
 local closeButtonHeight = 30
 
+-- Load the custom font
+local modalFont = love.graphics.newFont("assets/fonts/EncodeSansSemiCondensed-SemiBold.ttf", 24) -- Adjust the size as needed
+
 function instructionsModal.showInstructions()
-    modalText = "[Insert your instructions here]"
+    modalText = "Welcome to EcoCraft Challenge!\n\n" ..
+                "Instructions:\n" ..
+                "- Use the arrow keys to move your character.\n" ..
+                "- Collect all the green gems to complete the level.\n" ..
+                "- Avoid the red enemies.\n" ..
+                "- Press the 'S' key to open the settings.\n\n" ..
+                "Good luck and have fun!"
     showModal = true
     closeButtonActive = true
 end
@@ -34,7 +43,7 @@ function instructionsModal.draw()
 
         -- Draw the modal heading
         love.graphics.setColor(0, 0, 0) -- Black text color
-        love.graphics.setFont(love.graphics.newFont(18))
+        love.graphics.setFont(modalFont) -- Set the custom font
         local headingText = "Instructions"
         local textWidth = love.graphics.getFont():getWidth(headingText)
         local textX = modalX + (modalWidth - textWidth) / 2
@@ -43,7 +52,7 @@ function instructionsModal.draw()
 
         -- Draw the modal content
         love.graphics.setColor(0, 0, 0) -- Black text color
-        love.graphics.setFont(love.graphics.newFont(14))
+        love.graphics.setFont(modalFont) -- Set the custom font for instructions
         textWidth = love.graphics.getFont():getWidth(modalText)
         textX = modalX + (modalWidth - textWidth) / 2
         textY = modalY + 60
@@ -75,5 +84,6 @@ function instructionsModal.draw()
         end
     end
 end
+
 
 return instructionsModal
