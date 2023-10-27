@@ -5,7 +5,7 @@
 **Game Title:** Eco-City Revival
 
 **Game Description:** 
-# Eco-City Revival  is a 2D platformer game where players collect renewable energy elements, build clean energy structures, and overcome sustainability challenges in a diverse 2D world. Explore, craft, and learn to make sustainable decisions to create a greener environment.
+Eco-City Revival  is a 2D platformer game where players collect renewable energy elements, build clean energy structures, and overcome sustainability challenges in a diverse 2D world. Explore, craft, and learn to make sustainable decisions to create a greener environment.
 
 **Key Features:**
 - Dynamic 2D world with various environments, each reflecting energy and sustainability themes.
