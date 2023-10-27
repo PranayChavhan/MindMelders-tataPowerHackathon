@@ -1,5 +1,7 @@
 -- Import required modules
 local love = require("love")
+local settingsModal = require("states.settingsModal") -- Add this line
+local instructionsModal = require("states.instructionsModal") -- Add this line
 
 local startgame = {}
 
@@ -25,6 +27,10 @@ local buttons = {
 
 local cornerRadius = 10
 local cursorChanged = false
+
+-- Modals
+local showModal = false
+local modalText = ""
 
 function startgame.draw()
     -- Draw the darkened background image
@@ -57,6 +63,23 @@ function startgame.draw()
         love.graphics.setColor(255, 255, 255)
         love.graphics.setFont(buttonFont)
         love.graphics.print(button.text, textX, textY)
+
+        -- Check for button clicks
+        if love.mouse.isDown(1) then -- 1 represents the left mouse button
+            if mouseX >= buttonX and mouseX <= buttonX + buttonWidth and
+               mouseY >= buttonY and mouseY <= buttonY + buttonHeight then
+                handleButtonClick(button.action)
+            end
+        end
+    end
+
+    -- Show modal if needed
+    if showModal then
+        love.graphics.setColor(0, 0, 0, 200) -- Semi-transparent background
+        love.graphics.rectangle("fill", 100, 100, love.graphics.getWidth() - 200, love.graphics.getHeight() - 200)
+        love.graphics.setColor(255, 255, 255)
+        love.graphics.setFont(buttonFont)
+        love.graphics.printf(modalText, 120, 120, love.graphics.getWidth() - 240, "center")
     end
 
     -- Reset the cursor if it was not changed
@@ -64,5 +87,18 @@ function startgame.draw()
         love.mouse.setCursor()
     end
 end
+
+function handleButtonClick(action)
+    if action == "start" then
+        -- Navigate to the level1 screen (implement this part in your game)
+    elseif action == "exit" then
+        love.event.quit() -- Close the game
+    elseif action == "instructions" then
+        instructionsModal.showInstructions() -- Show instructions modal
+    elseif action == "settings" then
+        settingsModal.showSettings() -- Show settings modal
+    end
+end
+
 
 return startgame
