@@ -5,6 +5,7 @@ local settingsModal = {}
 
 local modalText = ""
 local showModal = false
+local closeButtonActive = false
 
 -- Modal properties
 local modalWidth = 700
@@ -13,9 +14,16 @@ local modalX = 600
 local modalY = 250
 local cornerRadius = 10
 
+-- Close button properties
+local closeButtonX = modalX + modalWidth - 40
+local closeButtonY = modalY + 10
+local closeButtonWidth = 30
+local closeButtonHeight = 30
+
 function settingsModal.showSettings()
-    modalText = "Here are the game settings:\n\n[Insert your settings here]"
+    modalText = "[Insert your settings here]"
     showModal = true
+    closeButtonActive = true
 end
 
 function settingsModal.draw()
@@ -41,10 +49,30 @@ function settingsModal.draw()
         textY = modalY + 60
         love.graphics.printf(modalText, textX, textY, modalWidth - 40, "left")
 
-        -- Draw the close button (an "X" symbol)
-        love.graphics.setColor(255, 0, 0) -- Red color for the button
-        love.graphics.line(modalX + modalWidth - 20, modalY + 10, modalX + modalWidth - 10, modalY + 20)
-        love.graphics.line(modalX + modalWidth - 10, modalY + 10, modalX + modalWidth - 20, modalY + 20)
+        -- Check if the mouse is over the close button
+        local isOverCloseButton = love.mouse.getX() >= closeButtonX and love.mouse.getX() <= closeButtonX + closeButtonWidth
+            and love.mouse.getY() >= closeButtonY and love.mouse.getY() <= closeButtonY + closeButtonHeight
+
+        -- Draw the close button as a clickable button
+        if isOverCloseButton then
+            love.mouse.setCursor(love.mouse.getSystemCursor("hand"))
+            
+        else
+            love.mouse.setCursor()
+            love.graphics.setColor(255, 0, 0) -- Red color for the button
+        end
+
+        love.graphics.rectangle("fill", closeButtonX, closeButtonY, closeButtonWidth, closeButtonHeight, 5, 5)
+
+        -- Draw the "X" symbol in white for the close button
+        love.graphics.setColor(255, 255, 255) -- White color for the symbol
+        love.graphics.line(closeButtonX + 5, closeButtonY + 5, closeButtonX + closeButtonWidth - 5, closeButtonY + closeButtonHeight - 5)
+        love.graphics.line(closeButtonX + 5, closeButtonY + closeButtonHeight - 5, closeButtonX + closeButtonWidth - 5, closeButtonY + 5)
+
+        -- Check if the close button is clicked
+        if isOverCloseButton and love.mouse.isDown(1) then
+            showModal = false
+        end
     end
 end
 
