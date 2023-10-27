@@ -11,6 +11,7 @@ Camera = require "lib/hump/camera"
 
 require 'src/constant'
 require 'src/Player'
+require 'src/Windmill'
 -- require 'src/Enemies'
 
 require 'src/states/StateStack'

@@ -10,17 +10,34 @@ function love.load()
     --     resizable = true,
     -- })
 
+    wf = require 'lib/windfield/windfield'
+    world = wf.newWorld(0, 0, false)
+
+    -- anim8 = require 'lib/anim8/anim8'
+
+    sti = require 'lib/Simple-Tiled-Implementation/sti'
+    cameraFile = require 'lib/hump/camera'
+
+    world:setQueryDebugDrawing(true)
+    world:addCollisionClass('Player')
+    world:addCollisionClass('Platform')
+    world:addCollisionClass('Chair')
+    world:addCollisionClass('Dam')
+    world:addCollisionClass('Windmill')
+
     love.window.setMode(VIRTUAL_WIDTH,VIRTUAL_HEIGHT)
 
     math.randomseed(os.time())
     print(os.time())
 
       -- keep track of keypressed
+      cam =cameraFile()
     
     love.keyboard.keysPressed={}
 
     gStateStack = StateStack()
     gStateStack:push(MainMenu())
+    cam:zoom(3.5)
 
    
 end
@@ -48,7 +65,6 @@ end
 function love.draw()
 
     --push:start()
-
     --love.graphics.setColor(0.1,0.1,0.1)
     --love.graphics.rectangle("fill",0,0,VIRTUAL_WIDTH,VIRTUAL_HEIGHT)  
     gStateStack:render()
