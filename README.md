@@ -21,13 +21,13 @@ Eco-Rush seamlessly integrates real-world energy facts, concepts, and ideas into
 **Tools and Technologies Used:**
 - Game Development: Love2d
 - Graphics: Tilemaps
-- Sound: 
+- Sound: royalty-free sound effects and music
 
 **Open Source License:** 
 
 **Game Link:** [Insert URL Link to Play the Game in a Web Browser]
 
-**Source Code Repository:** [Insert URL Link to the Source Code Repository, e.g., GitHub]
+**Source Code Repository:** https://github.com/PranayChavhan/MindMelders-tataPowerHackathon/tree/master
 
 **Special Notes (optional):**
 - Various NPCs exist in the city those will give educative information to the player
@@ -37,3 +37,11 @@ Eco-Rush seamlessly integrates real-world energy facts, concepts, and ideas into
 - Lead Developer/Contact: 7774860123
 - Email: pranaychavhan2102@gmail.com
 - Phone Number (optional): 7774860123
+
+
+**Screenshots:**
+![Screenshot from 2023-10-28 15-16-05 (copy)](https://github.com/PranayChavhan/MindMelders-tataPowerHackathon/assets/85397500/0a926eff-1883-4d08-8006-cecd4f356601)
+![Screenshot from 2023-10-28 15-16-20 (copy)](https://github.com/PranayChavhan/MindMelders-tataPowerHackathon/assets/85397500/d3c0391e-e054-41bb-9d53-72f03f0f5245)
+![Screenshot from 2023-10-28 15-16-42 (copy)](https://github.com/PranayChavhan/MindMelders-tataPowerHackathon/assets/85397500/56eaade8-88aa-4722-9885-d767d98e7178)
+![Screenshot from 2023-10-28 15-16-52](https://github.com/PranayChavhan/MindMelders-tataPowerHackathon/assets/85397500/60701dfc-b180-4580-9073-6c84eba23b06)
+
