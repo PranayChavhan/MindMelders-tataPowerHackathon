@@ -85,6 +85,7 @@ function Windmill_Mini:update(dt)
     -- end
     if player.grid_x == maze.exit.grid_x and player.grid_y == maze.exit.grid_y then
         gStateStack:pop()
+        fixedWindmill = true
     end
 
 end
@@ -96,11 +97,11 @@ function Windmill_Mini:render()
     for x=0, x_grid_max do
        for y=0, y_grid_max do
           if map[y][x] == OPEN then
-             love.graphics.setColor( white )
+             love.graphics.setColor( 0, 0.8, 0 )
              love.graphics.rectangle("fill", x * base_size, y * base_size, base_size, base_size+2)
           elseif map[y][x] == WALL then
              love.graphics.setColor(0,0,0)
-             love.graphics.rectangle("line", x * base_size, y * base_size, base_size, base_size)
+             love.graphics.rectangle("fill", x * base_size, y * base_size, base_size, base_size)
           elseif map[y][x] == WATER then
              love.graphics.setColor( blue )
              love.graphics.rectangle("fill", x * base_size, y * base_size, base_size, base_size)

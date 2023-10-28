@@ -36,6 +36,10 @@ function PlayState:render()
     self.player:render()
     self.mill:render()
     love.graphics.rectangle('fill', 440, 1570, 100, 30)
+
+
+    -- Hydro Coordinates 
+    love.graphics.rectangle('fill', 1700, 177, 170, 60)
     cam:detach()
 
     --love.graphics.draw(self.image, 0, 0)

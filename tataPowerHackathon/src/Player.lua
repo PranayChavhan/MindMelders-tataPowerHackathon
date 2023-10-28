@@ -3,7 +3,7 @@ Player = Class {
 }
 
 function Player:init()
-    self.player = world:newRectangleCollider(70,1610,10,10,{collision_class="Player"})
+    self.player = world:newRectangleCollider(1570, 35, 10, 10,{collision_class="Player"})
     self.player.speed=180
     self.player:setFixedRotation(true)
     self.player.isMoving = false
@@ -49,12 +49,34 @@ function Player:update(dt)
         self.player.anim:gotoFrame(2)
     end
 
-    if checkCollision(px, py, 10, 10, 440, 1570, 100, 30) then
+    if fixedWindmill == false and checkCollision(px, py, 10, 10, 440, 1570, 100, 30) then
         glevel = 2
         gStateStack:push(DialogueState())
         self.player:setX(70)
         self.player:setY(1610)
     end
+    if fixedHydro == false and checkCollision(px, py, 10, 10, 1700, 177, 170, 60) then
+        glevel = 3
+        gStateStack:push(DialogueState())
+        self.player:setX(70)
+        self.player:setY(1610)
+    end
+    if fixedSolar1 == false and checkCollision(px, py, 10, 10, 1136, 1519, 100, 50) then
+        glevel = 4
+        gStateStack:push(DialogueState())
+        fixedSolar1 = true
+        self.player:setX(70)
+        self.player:setY(1610)
+    end
+
+    if fixedSolar2 == false and checkCollision(px, py, 10, 10, 375, 13, 120, 30) then
+        glevel = 4
+        gStateStack:push(DialogueState())
+        fixedSolar2 = true
+        self.player:setX(70)
+        self.player:setY(1610)
+    end
+
     self.player.anim:update(dt)
  
 end

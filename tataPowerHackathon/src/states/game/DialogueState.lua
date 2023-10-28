@@ -90,6 +90,14 @@ function DialogueState:update(dt)
                 gStateStack:pop()
                 print("Yes Reached")
                 gStateStack:push(Windmill_Mini())
+            elseif glevel == 3 then
+                gStateStack:pop()
+                print("Yes Reached")
+                gStateStack:push(HydroMini())
+            elseif glevel == 4 then
+                gStateStack:pop()
+                print("Yes Reached")
+                gStateStack:push(SolarMini())
             else
                 gStateStack:pop()
             end

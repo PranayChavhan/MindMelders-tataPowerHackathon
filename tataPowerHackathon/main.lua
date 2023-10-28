@@ -1,12 +1,16 @@
 
 require 'src/Dependencies'
 glevel = 0
+fixedWindmill = false
+fixedHydro = false
+fixedSolar1 = false
+fixedSolar2 = false
 
 function love.load()
 
-    love.window.setTitle("EcoCraft Challenge")
-    local displayWidth, displayHeight = love.window.getDesktopDimensions()
-    love.window.setMode(displayWidth, displayHeight, {fullscreen = false})
+   --  love.window.setTitle("EcoCraft Challenge")
+   --  local displayWidth, displayHeight = love.window.getDesktopDimensions()
+   --  love.window.setMode(displayWidth, displayHeight, {fullscreen = false})
     
     wf = require 'lib/windfield/windfield'
     world = wf.newWorld(0, 0, false)
@@ -50,10 +54,11 @@ end
 -- end
 
 function love.keypressed(key)
-    if key == 'escape' then
-        love.event.quit()
-    end
-    if key == "w" then
+   if key == 'escape' then
+       love.event.quit()
+   end
+   if glevel == 2 and fixedWindmill == false then
+     if key == "w" then
         if collide(-1, 0) then
            player.grid_y = player.grid_y - 1
         end
@@ -72,7 +77,8 @@ function love.keypressed(key)
      elseif key == 'escape' then
         love.event.push('quit')
      end
-    love.keyboard.keysPressed[key] = true
+  end
+   love.keyboard.keysPressed[key] = true
 end
 
 function love.keyboard.wasPressed(key)
