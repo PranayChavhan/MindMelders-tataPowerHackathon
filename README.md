@@ -21,13 +21,13 @@ Eco-Rush seamlessly integrates real-world energy facts, concepts, and ideas into
 **Tools and Technologies Used:**
 - Game Development: Love2d
 - Graphics: Tilemaps
-- Sound: 
+- Sound: royalty-free sound effects and music
 
 **Open Source License:** 
 
 **Game Link:** [Insert URL Link to Play the Game in a Web Browser]
 
-**Source Code Repository:** [Insert URL Link to the Source Code Repository, e.g., GitHub]
+**Source Code Repository:** https://github.com/PranayChavhan/MindMelders-tataPowerHackathon/tree/master
 
 **Special Notes (optional):**
 - Various NPCs exist in the city those will give educative information to the player
