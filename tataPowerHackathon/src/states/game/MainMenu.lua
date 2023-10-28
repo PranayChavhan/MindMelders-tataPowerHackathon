@@ -7,18 +7,41 @@
 ]]
 
 MainMenu = Class {
-    __includes = BaseState
+    __includes = BaseState,
+    bgMusic = love.audio.newSource("assets/sounds/bg.mp3", "stream")
 }
+
+
+function MainMenu:startBackgroundMusic()
+    -- Set the volume for the background music (between 0 and 1)
+    self.bgMusic:setVolume(0.5)
+
+    -- Set the background music to loop
+    self.bgMusic:setLooping(true)
+
+    -- Start playing the background music
+    love.audio.play(self.bgMusic)
+end
+
+function MainMenu:stopBackgroundMusic()
+    -- Stop the background music
+    love.audio.stop(self.bgMusic)
+end
 
 -- whether we're highlighting "Start" or "High Scores"
 local highlighted = 1
 
 -- Load the background image
 local background = love.graphics.newImage("assets/images/bg.jpg")
+-- Load the button click sound
+local buttonClickSound = love.audio.newSource("assets/sounds/click-button.mp3", "static")
 
 function MainMenu:init()
     counter_var = 1
     glevel = 1
+
+    -- Call the function to start background music
+    self:startBackgroundMusic()
 end
 
 function MainMenu:update(dt)
@@ -39,22 +62,38 @@ function MainMenu:update(dt)
 
     -- confirm whichever option we have selected to change screens
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+        buttonClickSound:play() -- Play the button click sound
+
         if highlighted == 1 then
             gStateStack:pop()
             gStateStack:push(PlayState())
-            gStateStack:push(DialogueState())
+            gStateStack:push(DialogueState)
+            
+            -- Stop the background music when transitioning to the game
+            self:stopBackgroundMusic()
         elseif highlighted == 2 then
             gStateStack:pop()
             gStateStack:push(Instructions())
+            
+            -- Stop the background music when transitioning to the game
+            self:stopBackgroundMusic()
         elseif highlighted == 3 then
             gStateStack:pop()
             gStateStack:push(Credit())
+            
+            -- Stop the background music when transitioning to the game
+            self:stopBackgroundMusic()
         elseif highlighted == 4 then
             gStateStack:pop()
             gStateStack:push(End())
+            
+            -- Stop the background music when transitioning to the game
+            self:stopBackgroundMusic()
         end
     end
 end
+
+
 
 function MainMenu:render()
     -- Draw the background image
