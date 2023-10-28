@@ -1,6 +1,7 @@
 
 require 'src/Dependencies'
 glevel = 0
+gtasks = 0
 fixedWindmill = false
 fixedHydro = false
 fixedSolar1 = false

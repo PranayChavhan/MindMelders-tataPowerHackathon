@@ -16,6 +16,13 @@ function MainMenu:init()
 
     counter_var = 1
     glevel = 1
+    gtasks = 0
+    fixedWindmill = false
+    fixedHydro = false
+    fixedSolar1 = false
+    fixedSolar2 = false
+    gcol1 = false
+    gcol2 = false
 
 end
 

@@ -9,22 +9,27 @@ function DialogueState:init()
 
     self.text = {
 
-        [1] = {"In the not-so-distant future, you are Captain Apurv of the Indian Spacecraft 'Varja' a lone guardian",
-               "sent on a daring mission to protect Earth and its allies from an ancient and",
-               "malevolent extraterrestrial force known as the 'Cosmic Invaders' ", "\n",
-               "Captain Apurv, your first challenge is to navigate the treacherous asteroid belt blocking",
-               "the path of the Vajra and its allies. With deft maneuvers and advanced weaponry, break through",
-               "the hazardous debris to pave the way for Earth's defense fleet."},
-        [2] = {"The Cosmic Invaders, relentless in their pursuit of universal domination, unleash swarms ",
-               "of formidable alien spacecraft. Utilizing your Indian ingenuity, engage in intense dogfights,",
-               "prove that humanity's resolve is not to be underestimated.", "\n", "DESTROY ALL ENEMIES !!"},
-        [3] = {"In the heart of enemy territory, you confront the Galactic Tyrant, a colossal and malevolent",
-               "extraterrestrial being. Utilize the Vajra's resonance disruptor to weaken its armor",
-               "Dodge its devastating attacks and target its exposed areas. ", "\n", "FINISH HIM !!"},
-        [4] = {"With a final, mighty blow, Captain Apurv obliterates the Galactic Tyrant, securing victory",
-               "for Earth and India. The universe rejoices in their triumph", "\n",
-               "Congratulations to Captain Apurv and the formidable spacecraft, Vajra, for their historic feat",
-               "Their bravery and skill have saved countless lives"}
+        [1] = {"In the heart of Greenvale, where nature and technology once ",
+               "thrived side by side, a shadow now looms.",
+               "The city's renewable energy resources lay dormant.","\n",
+               "Your quest: explore the city",
+               "and complete tasks to bring back electricity in the city.", "\n"},
+        [2] = {"A windmill is a powerful machine that harnesses the energy from the ",
+               "wind to generate electricity or mechanical power.",
+               "The first wind farms in India were installed in the year",
+               "Currently the windmill has been deactivated due to inactivity","\n",
+               "Your quest: Fix the windmill by solving the maze"},
+        [3] = {"A dam is a man-made structure that blocks the flow of a river.",
+               "It's used for generating hydroelectric power. The first hydroelectric",
+               "power plant in India was installed in Darjeeling, West Bengal.",
+                "The Dam has not been started since 3 years","\n",
+                "Your quest: Activate the dam by clearing the blockage"},
+        [4] = {"Solar panels are devices that convert sunlight into electricity.",
+               "They provide clean and renewable energy.",
+               "India's first solar power plant was developed by Godawari Green ",
+               "Limited in Rajasthan.This area has been receiving a ",
+               "good amount of solar energy.","\n",
+                "Your quest: Place Solar panels in the area"}
     }
 
     self.currentText = ""
