@@ -39,8 +39,6 @@ local buttonClickSound = love.audio.newSource("assets/sounds/click-button.mp3", 
 function MainMenu:init()
     counter_var = 1
     glevel = 1
-
-    -- Call the function to start background music
     self:startBackgroundMusic()
 end
 
@@ -67,7 +65,7 @@ function MainMenu:update(dt)
         if highlighted == 1 then
             gStateStack:pop()
             gStateStack:push(PlayState())
-            gStateStack:push(DialogueState)
+            gStateStack:push(DialogueState())
             
             -- Stop the background music when transitioning to the game
             self:stopBackgroundMusic()
@@ -92,8 +90,6 @@ function MainMenu:update(dt)
         end
     end
 end
-
-
 
 function MainMenu:render()
     -- Draw the background image

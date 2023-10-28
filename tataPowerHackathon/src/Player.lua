@@ -18,31 +18,43 @@ function Player:init()
     self.player.animation.down = anim8.newAnimation(self.player.grid('1-3', 4), 0.1)
 
     self.player.anim = self.player.animation.left
+    self.footstepsSound = love.audio.newSource('assets/sounds/footsteps.mp3', 'static')
+    self.soundPlaying = false
 end
 
 function Player:update(dt)
-    local px, py = self.player:getX(),self.player:getY()
+    local px, py = self.player:getX(), self.player:getY()
     isMoving = false
-    cam:lookAt(px,py)
+    cam:lookAt(px, py)
+
     if love.keyboard.isDown("right") then
-        self.player:setX(self.player:getX() + self.player.speed*dt)
+        self.player:setX(self.player:getX() + self.player.speed * dt)
         self.player.anim = self.player.animation.right
         isMoving = true
-    end
-    if love.keyboard.isDown("left") then
-        self.player:setX(self.player:getX() - self.player.speed*dt)
+    elseif love.keyboard.isDown("left") then
+        self.player:setX(self.player:getX() - self.player.speed * dt)
         self.player.anim = self.player.animation.left
         isMoving = true
-    end
-    if love.keyboard.isDown("up") then
-        self.player:setY(self.player:getY() - self.player.speed*dt)
+    elseif love.keyboard.isDown("up") then
+        self.player:setY(self.player:getY() - self.player.speed * dt)
         self.player.anim = self.player.animation.down
         isMoving = true
-    end
-    if love.keyboard.isDown("down") then
-        self.player:setY(self.player:getY() + self.player.speed*dt)
+    elseif love.keyboard.isDown("down") then
+        self.player:setY(self.player:getY() + self.player.speed * dt)
         self.player.anim = self.player.animation.up
         isMoving = true
+
+        -- Check if the sound is not already playing
+        if not self.soundPlaying then
+            self.footstepsSound:play()
+            self.soundPlaying = true
+        end
+    else
+        -- If none of the movement keys are pressed, pause the sound
+        if self.soundPlaying then
+            self.footstepsSound:pause()
+            self.soundPlaying = false
+        end
     end
 
     if isMoving == false then

@@ -1,15 +1,37 @@
 PlayState = Class {
-    __includes = BaseState
+    __includes = BaseState,
+    bgMusic = love.audio.newSource("assets/sounds/playstate.mp3", "stream")
 }
 platforms = {}
 
 function PlayState:init()
-
     --self.image = love.graphics.newImage('sprites/credits.jpg')
     self.player = Player()
     self.mill = Windmill()
     self:loadMap()
+
+    -- Call the function to start the background music
+    self:startBackgroundMusic()
 end
+
+function PlayState:startBackgroundMusic()
+    -- Set the volume for the background music (between 0 and 1)
+    self.bgMusic:setVolume(0.5)
+
+    -- Set the background music to loop
+    self.bgMusic:setLooping(true)
+
+    -- Start playing the background music
+    love.audio.play(self.bgMusic)
+end
+
+function PlayState:stopBackgroundMusic()
+    -- Stop the background music
+    love.audio.stop(self.bgMusic)
+end
+
+
+
 
 function PlayState:update(dt)
 
@@ -21,8 +43,10 @@ function PlayState:update(dt)
     if love.keyboard.wasPressed('return') then
         gStateStack:pop()
         gStateStack:push(MainMenu())
-    end
 
+        -- Stop the background music when transitioning to a different state
+        self:stopBackgroundMusic()
+    end
 end
 
 function PlayState:render()
