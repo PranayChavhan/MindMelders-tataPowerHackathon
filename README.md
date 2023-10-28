@@ -25,7 +25,7 @@ Eco-Rush seamlessly integrates real-world energy facts, concepts, and ideas into
 
 **Open Source License:** 
 
-**Game Link:** [Insert URL Link to Play the Game in a Web Browser]
+**Game Link:** https://eco-city.itch.io/eco-city
 
 **Source Code Repository:** https://github.com/PranayChavhan/MindMelders-tataPowerHackathon/tree/master
 
