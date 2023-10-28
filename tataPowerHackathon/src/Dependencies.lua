@@ -22,6 +22,10 @@ require 'src/states/game/PlayState'
 require 'src/states/game/Credit'
 require 'src/states/game/Instructions'
 require 'src/states/game/End'
+require 'src/states/game/DialogueState'
+require 'src/states/game/Windmill_Mini'
+require 'src/states/game/HydroMini'
+require 'src/states/game/SolarMini'
 
 
 

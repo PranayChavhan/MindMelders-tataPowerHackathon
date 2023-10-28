@@ -9,6 +9,8 @@ function PlayState:init()
     self.player = Player()
     self.mill = Windmill()
     self:loadMap()
+    self.panelimage = love.graphics.newImage('sprites/Panel.png')
+    self.background = love.graphics.newImage('sprites/background.jpeg')
 end
 
 function PlayState:update(dt)
@@ -23,11 +25,20 @@ function PlayState:update(dt)
         gStateStack:push(MainMenu())
     end
 
+    -- if cam.x < VIRTUAL_WIDTH/2 then
+    --     cam.x = VIRTUAL_WIDTH/2 - 255
+    -- end
+
+    -- if cam.y < WINDOW_HEIGHT/2 then
+    --     cam.y = WINDOW_HEIGHT/2 - 255
+    -- end
+
 end
 
 function PlayState:render()
     cam:attach()
-    world:draw()
+    love.graphics.draw(self.background, -1000,-1000,nil,50,50)
+    -- world:draw()
     
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print("Play State",100,100)
@@ -35,9 +46,16 @@ function PlayState:render()
     gameMap:drawLayer(gameMap.layers["Tile Layer 2"])
     self.player:render()
     self.mill:render()
-    cam:detach()
-    --love.graphics.draw(self.image, 0, 0)
+    -- love.graphics.rectangle('fill', 440, 1570, 100, 30)
+    if fixedSolar2 == true then
+        love.graphics.draw(self.panelimage, 300, 40, nil, 0.05)
+    end
 
+    -- Hydro Coordinates 
+    -- love.graphics.rectangle('fill', 1700, 177, 170, 60)
+    cam:detach()
+
+    --love.graphics.draw(self.image, 0, 0)
 end
 
 function PlayState:loadMap()

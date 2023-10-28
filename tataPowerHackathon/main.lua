@@ -1,5 +1,10 @@
 
 require 'src/Dependencies'
+glevel = 0
+fixedWindmill = false
+fixedHydro = false
+fixedSolar1 = false
+fixedSolar2 = false
 
 
 function love.load()
@@ -10,6 +15,7 @@ function love.load()
     --     resizable = true,
     -- })
 
+    
     wf = require 'lib/windfield/windfield'
     world = wf.newWorld(0, 0, false)
 
@@ -55,6 +61,27 @@ function love.keypressed(key)
     if key == 'escape' then
         love.event.quit()
     end
+    if glevel == 2 and fixedWindmill == false then
+      if key == "w" then
+         if collide(-1, 0) then
+            player.grid_y = player.grid_y - 1
+         end
+      elseif key == "s" then
+         if collide(1, 0) then
+            player.grid_y = player.grid_y + 1
+         end
+      elseif key == "a" then
+         if collide(0, -1) then
+            player.grid_x = player.grid_x - 1
+         end
+      elseif key == "d" then
+         if collide(0, 1) then
+            player.grid_x = player.grid_x + 1
+         end
+      elseif key == 'escape' then
+         love.event.push('quit')
+      end
+   end
     love.keyboard.keysPressed[key] = true
 end
 
@@ -68,9 +95,15 @@ function love.draw()
     --love.graphics.setColor(0.1,0.1,0.1)
     --love.graphics.rectangle("fill",0,0,VIRTUAL_WIDTH,VIRTUAL_HEIGHT)  
     gStateStack:render()
+    
     --push:finish()
 
-end 
+end
+
+-- collision conditions, if overlap happens then collision is true --
+function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
+    return x1 < x2 + w2 and x2 < x1 + w1 and y1 < y2 + h2 and y2 < y1 + h1
+end
 
 
 

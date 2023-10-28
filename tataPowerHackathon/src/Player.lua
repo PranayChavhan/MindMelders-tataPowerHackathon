@@ -3,7 +3,7 @@ Player = Class {
 }
 
 function Player:init()
-    self.player = world:newRectangleCollider(70,1610,10,10,{collision_class="Player"})
+    self.player = world:newRectangleCollider(1570, 35, 10, 10,{collision_class="Player"})
     self.player.speed=180
     self.player:setFixedRotation(true)
     self.player.isMoving = false
@@ -21,31 +21,74 @@ function Player:init()
 end
 
 function Player:update(dt)
+    local px, py = self.player:getX(),self.player:getY()
     isMoving = false
-    cam:lookAt(self.player:getX(),self.player:getY())
+    cam:lookAt(px,py)
+    -- if self.player:getX() < 0 then
+    --     self.player:setX(0)
+    -- end
+    -- if self.player:getY() < 0 then
+    --     self.player:setY(0)
+    -- end
+    -- if self.player:getX() > 1910 then
+    --     self.player:setX(1910)
+    -- end
+    -- if self.player:getY() > 1910 then
+    --     self.player:setY(1910)
+    -- end
+    -- self.player:setX(self.player:getX())
+
     if love.keyboard.isDown("right") then
-        self.player:setX(self.player:getX() + self.player.speed*dt)
+        self.player:setX(math.min(self.player:getX() + self.player.speed*dt, 1920 - 13))
         self.player.anim = self.player.animation.right
         isMoving = true
     end
     if love.keyboard.isDown("left") then
-        self.player:setX(self.player:getX() - self.player.speed*dt)
+        self.player:setX(math.max(0, self.player:getX() - self.player.speed*dt))
         self.player.anim = self.player.animation.left
         isMoving = true
     end
     if love.keyboard.isDown("up") then
-        self.player:setY(self.player:getY() - self.player.speed*dt)
+        self.player:setY(math.max(0, self.player:getY() - self.player.speed*dt))
         self.player.anim = self.player.animation.down
         isMoving = true
     end
     if love.keyboard.isDown("down") then
-        self.player:setY(self.player:getY() + self.player.speed*dt)
+        self.player:setY(math.min(self.player:getY() + self.player.speed*dt, 1920 - 13))
         self.player.anim = self.player.animation.up
         isMoving = true
     end
 
     if isMoving == false then
         self.player.anim:gotoFrame(2)
+    end
+
+    if fixedWindmill == false and checkCollision(px, py, 10, 10, 440, 1570, 100, 30) then
+        glevel = 2
+        gStateStack:push(DialogueState())
+        self.player:setX(70)
+        self.player:setY(1610)
+    end
+    if fixedHydro == false and checkCollision(px, py, 10, 10, 1700, 177, 170, 60) then
+        glevel = 3
+        gStateStack:push(DialogueState())
+        self.player:setX(70)
+        self.player:setY(1610)
+    end
+    if fixedSolar1 == false and checkCollision(px, py, 10, 10, 1136, 1519, 100, 50) then
+        glevel = 4
+        gStateStack:push(DialogueState())
+        self.player:setX(70)
+        self.player:setY(1610)
+        fixedSolar1 = true
+    end
+
+    if fixedSolar2 == false and checkCollision(px, py, 10, 10, 375, 13, 120, 30) then
+        glevel = 4
+        gStateStack:push(DialogueState())
+        self.player:setX(70)
+        self.player:setY(1610)
+        fixedSolar2 = true
     end
 
     self.player.anim:update(dt)
@@ -57,6 +100,7 @@ end
 
 function Player:render()
 --    love.graphics.rectangle('fill', self.player:getX() - 8, self.player:getY() - 8, 16, 16)
-   self.player.anim:draw(self.player.spritesheet,self.player:getX() - 10, self.player:getY() - 10, nil, 1.3, 1.3)
+self.player.anim:draw(self.player.spritesheet,self.player:getX() - 10, self.player:getY() - 10, nil, 1.3, 1.3)
+-- print(glevel)
    
 end

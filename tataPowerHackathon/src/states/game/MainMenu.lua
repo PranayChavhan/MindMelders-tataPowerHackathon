@@ -15,6 +15,7 @@ local highlighted = 1
 function MainMenu:init()
 
     counter_var = 1
+    glevel = 1
 
 end
 
@@ -46,7 +47,7 @@ function MainMenu:update(dt)
 
             gStateStack:pop()
             gStateStack:push(PlayState())
-           -- gStateStack:push(Di())
+           gStateStack:push(DialogueState())
 
         elseif highlighted == 2 then
             gStateStack:pop()
