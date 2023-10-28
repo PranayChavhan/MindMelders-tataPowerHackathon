@@ -85,6 +85,7 @@ function Windmill_Mini:update(dt)
     -- end
     if player.grid_x == maze.exit.grid_x and player.grid_y == maze.exit.grid_y then
         gStateStack:pop()
+        gtasks = gtasks + 1
         fixedWindmill = true
     end
 

@@ -14,8 +14,8 @@ function HydroMini:init()
     
 
     self.manyenemies = {}
-    for i = 1, 2 do
-        for j = 1, 2 do
+    for i = 1, 7 do
+        for j = 1, 13 do
             local enemy = {}
             enemy.x = j * 60
             enemy.y = i * 60 - 60
@@ -29,6 +29,8 @@ function HydroMini:init()
 end
 
 function HydroMini:update(dt)
+
+    
 
     -- if love.keyboard.wasPressed('return') then
     --     gStateStack:pop()
@@ -68,6 +70,7 @@ function HydroMini:update(dt)
 
     if #self.manyenemies == 0 then
         fixedHydro = true
+        gtasks = gtasks + 1
         gStateStack:pop()
     end
 end

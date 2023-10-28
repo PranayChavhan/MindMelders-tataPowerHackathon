@@ -5,6 +5,9 @@ Credit = Class {
 function Credit:init()
 
     --self.image = love.graphics.newImage('sprites/credits.jpg')
+    for _, body in pairs(world:getBodies()) do
+        body:destroy()
+    end
 end
 
 function Credit:update(dt)

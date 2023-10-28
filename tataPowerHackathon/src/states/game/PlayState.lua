@@ -3,12 +3,17 @@ PlayState = Class {
     bgMusic = love.audio.newSource("assets/sounds/playstate.mp3", "stream")
 }
 platforms = {}
+chairs = {}
+dams = {}
+windmills = {}
 
 function PlayState:init()
     --self.image = love.graphics.newImage('sprites/credits.jpg')
     self.player = Player()
     self.mill = Windmill()
     self:loadMap()
+    self.panelimage = love.graphics.newImage('sprites/Panel.png')
+    self.background = love.graphics.newImage('sprites/background.jpeg')
 
     -- Call the function to start the background music
     self:startBackgroundMusic()
@@ -47,11 +52,13 @@ function PlayState:update(dt)
         -- Stop the background music when transitioning to a different state
         self:stopBackgroundMusic()
     end
+    print(gtasks)
 end
 
 function PlayState:render()
     cam:attach()
-    world:draw()
+    love.graphics.setLineWidth(2)
+    love.graphics.draw(self.background, -1000,-1000,nil,50,50)
     
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print("Play State",100,100)
@@ -59,12 +66,20 @@ function PlayState:render()
     gameMap:drawLayer(gameMap.layers["Tile Layer 2"])
     self.player:render()
     self.mill:render()
-    love.graphics.rectangle('fill', 440, 1570, 100, 30)
+    -- love.graphics.rectangle('fill', 440, 1570, 100, 30)
+    if fixedSolar2 == true then
+        love.graphics.draw(self.panelimage, 300, 40, nil, 0.05)
+        love.graphics.draw(self.panelimage, 480, 40, nil, 0.05)
+    end
 
-
-    -- Hydro Coordinates 
-    love.graphics.rectangle('fill', 1700, 177, 170, 60)
+    if fixedSolar1 == true then
+        love.graphics.draw(self.panelimage, 1046, 1260, nil, 0.05)
+        love.graphics.draw(self.panelimage, 1231, 1260, nil, 0.05)
+    end
+    world:draw()
     cam:detach()
+    love.graphics.rectangle('line', 25, 25, 100 ,20)
+    love.graphics.rectangle('fill', 25, 25, gtasks * 25,20)
 
     --love.graphics.draw(self.image, 0, 0)
 end

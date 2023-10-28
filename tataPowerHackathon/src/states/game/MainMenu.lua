@@ -39,6 +39,13 @@ local buttonClickSound = love.audio.newSource("assets/sounds/click-button.mp3", 
 function MainMenu:init()
     counter_var = 1
     glevel = 1
+    gtasks = 0
+    fixedWindmill = false
+    fixedHydro = false
+    fixedSolar1 = false
+    fixedSolar2 = false
+    gcol1 = false
+    gcol2 = false
     self:startBackgroundMusic()
 end
 
