@@ -8,9 +8,9 @@ fixedSolar2 = false
 
 function love.load()
 
-   --  love.window.setTitle("EcoCraft Challenge")
-   --  local displayWidth, displayHeight = love.window.getDesktopDimensions()
-   --  love.window.setMode(displayWidth, displayHeight, {fullscreen = false})
+    love.window.setTitle("EcoCraft Challenge")
+    local displayWidth, displayHeight = love.window.getDesktopDimensions()
+    love.window.setMode(displayWidth, displayHeight, {fullscreen = false})
     
     wf = require 'lib/windfield/windfield'
     world = wf.newWorld(0, 0, false)
