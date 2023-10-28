@@ -14,6 +14,8 @@ function PlayState:init()
     self:loadMap()
     self.panelimage = love.graphics.newImage('sprites/Panel.png')
     self.background = love.graphics.newImage('sprites/background.jpeg')
+    self.font = love.graphics.newFont('assets/fonts/VT323-Regular.ttf', 24)
+    self.sunimage = love.graphics.newImage('sprites/Warmsign.png')
 
     -- Call the function to start the background music
     self:startBackgroundMusic()
@@ -56,8 +58,9 @@ function PlayState:update(dt)
 end
 
 function PlayState:render()
+    love.graphics.setColor(1, 1, 1, 1)
     cam:attach()
-    love.graphics.setLineWidth(2)
+    -- love.graphics.setLineWidth(2)
     love.graphics.draw(self.background, -1000,-1000,nil,50,50)
     
     love.graphics.setColor(1, 1, 1, 1)
@@ -76,10 +79,20 @@ function PlayState:render()
         love.graphics.draw(self.panelimage, 1046, 1260, nil, 0.05)
         love.graphics.draw(self.panelimage, 1231, 1260, nil, 0.05)
     end
-    world:draw()
+    love.graphics.draw(self.sunimage, 420, 20, nil, 0.3)
+    love.graphics.draw(self.sunimage, 1177, 1528, nil, 0.3)
+
+    -- Hydro Coordinates 
+    -- love.graphics.rectangle('fill', 1700, 177, 170, 60)
+    -- world:draw()
+
     cam:detach()
-    love.graphics.rectangle('line', 25, 25, 100 ,20)
-    love.graphics.rectangle('fill', 25, 25, gtasks * 25,20)
+    love.graphics.setColor(0, 0.9, 0)
+    love.graphics.rectangle('line', 300, 100, 400 ,40)
+    love.graphics.rectangle('fill', 300, 100, gtasks * 100,40)
+    love.graphics.setColor(0, 0, 0)
+    love.graphics.setFont(self.font)
+    love.graphics.print("Complete All Tasks", 380, 105)
 
     --love.graphics.draw(self.image, 0, 0)
 end

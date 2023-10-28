@@ -12,8 +12,8 @@ function HydroMini:init()
     self.player.y = VIRTUAL_HEIGHT - self.player.height
     self.player.speed = 200
     
-
     self.manyenemies = {}
+    self.image =  love.graphics.newImage("sprites/stones.png")
     for i = 1, 7 do
         for j = 1, 13 do
             local enemy = {}
@@ -77,13 +77,14 @@ end
 
 function HydroMini:render()
 
-    love.graphics.setColor(0, 0.7, 0.7, 1)
+    love.graphics.setColor(0, 0.7, 0.9, 1)
     love.graphics.rectangle('fill', 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT)
-    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setColor(0.5, 0.8, 0.8, 1)
     love.graphics.rectangle('fill', self.player.x, self.player.y, self.player.width, self.player.height)
-    love.graphics.setColor(0, 0, 0, 1)
+    -- love.graphics.setColor(0, 0, 0, 1)
     for key, value in ipairs(self.manyenemies) do
-        love.graphics.rectangle('line', value.x, value.y, value.width, value.height)
+        love.graphics.draw(self.image, value.x, value.y, nil, 0.2)
+        -- love.graphics.rectangle('line', value.x, value.y, value.width, value.height)
     end
 
     love.graphics.setColor(0, 0.5, 0, 1)
@@ -92,8 +93,10 @@ function HydroMini:render()
         love.graphics.rectangle('fill', value.x, value.y, value.width, value.height)
     end
 
+    
     print(#self.manybullets)
-
+    love.graphics.setColor(0, 0, 0, 1)
+    love.graphics.print("Destroy All Stones", 350, 500)
     --love.graphics.draw(self.image, 0, 0)
 
 end
