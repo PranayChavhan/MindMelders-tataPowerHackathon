@@ -33,7 +33,9 @@ function love.load()
     print(os.time())
 
       -- keep track of keypressed
-      cam =cameraFile()
+    cam = cameraFile()
+    cam:zoom(displayWidth / VIRTUAL_WIDTH, displayHeight / VIRTUAL_HEIGHT)
+    cam:lookAt(displayWidth / 2, displayHeight / 2)
     
     love.keyboard.keysPressed={}
 
