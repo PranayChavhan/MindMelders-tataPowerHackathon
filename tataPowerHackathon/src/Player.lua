@@ -20,8 +20,8 @@ function Player:init()
     self.player.animation.down = anim8.newAnimation(self.player.grid('1-3', 4), 0.1)
 
     self.player.anim = self.player.animation.left
-    self.footstepsSound = love.audio.newSource('assets/sounds/footsteps.mp3', 'static')
-    self.soundPlaying = false
+    -- self.footstepsSound = love.audio.newSource('assets/sounds/footsteps.mp3', 'static')
+    -- self.soundPlaying = false
 end
 
 function Player:update(dt)
@@ -45,18 +45,6 @@ function Player:update(dt)
         self.player:setY(self.player:getY() + self.player.speed * dt)
         self.player.anim = self.player.animation.up
         isMoving = true
-
-        -- Check if the sound is not already playing
-        if not self.soundPlaying then
-            self.footstepsSound:play()
-            self.soundPlaying = true
-        end
-    else
-        -- If none of the movement keys are pressed, pause the sound
-        if self.soundPlaying then
-            self.footstepsSound:pause()
-            self.soundPlaying = false
-        end
     end
 
     if isMoving == false then
